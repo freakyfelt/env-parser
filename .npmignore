@@ -1,1 +1,6 @@
-__tests__/
+scripts/
+src/
+*.test.*
+.husky
+.prettierignore
+.prettierrc

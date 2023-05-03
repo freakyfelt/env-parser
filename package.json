@@ -1,7 +1,7 @@
 {
   "name": "env-parser",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "Provides a simple way to parse environment variables into a typed object",
   "author": {
     "name": "Bruce Felt",
     "url": "https://github.com/freakyfelt/env-parser"
@@ -12,27 +12,47 @@
   "repository": "https://github.com/freakyfelt/env-parser",
   "license": "MIT",
   "engines": {
-    "node": ">=10"
+    "node": ">=16"
   },
   "main": "index.js",
   "files": [
-    "index.js"
+    "dist/**/*"
   ],
+  "exports": {
+    "./*": {
+      "types": "./dist/types/*.d.ts",
+      "require": "./dist/cjs/*.js",
+      "import": "./dist/esm/*.js",
+      "default": "./dist/esm/*.js"
+    }
+  },
   "scripts": {
-    "lint": "eslint . --cache --fix",
-    "pretest": "npm run lint",
-    "test:jest": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
-    "test": "npm run test:jest --",
+    "build": "npm run clean && npm run build:compile && npm run build:post",
+    "build:compile": "tsc -b ./tsconfig.cjs.json ./tsconfig.esm.json ./tsconfig.types.json",
+    "build:post": "node scripts/esm-package-json.mjs",
+    "clean": "rm -rf ./dist",
+    "format": "prettier --loglevel warn --write \"**/*.{ts,md}\"",
+    "lint": "eslint . --cache --fix --ext .ts,.tsx",
+    "pretest": "npm run lint && tsc",
+    "test": "mocha",
+    "posttest": "npm run format",
     "prepare": "husky install"
   },
-  "keywords": [],
+  "keywords": ["env", "process", "parser"],
   "devDependencies": {
+    "@tsconfig/node16": "^1.0.3",
+    "@types/jest": "^29.5.1",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "^16.18.25",
+    "@typescript-eslint/eslint-plugin": "^5.59.2",
+    "@typescript-eslint/parser": "^5.59.2",
     "eslint": "^8.39.0",
     "husky": "^8.0.3",
-    "jest": "^29.5.0",
-    "lint-staged": "^13.2.2"
+    "lint-staged": "^13.2.2",
+    "mocha": "^10.2.0",
+    "prettier": "^2.8.8",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix"
