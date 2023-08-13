@@ -70,8 +70,8 @@ export class UnsafeEnvParser<TEnv extends string> {
 		} else {
 			throw new Error(
 				`Invalid environment variable ${String(
-					name
-				)}: "${value}" is not a boolean`
+					name,
+				)}: "${value}" is not a boolean`,
 			);
 		}
 	}
@@ -93,8 +93,8 @@ export class UnsafeEnvParser<TEnv extends string> {
 		if (isNaN(parsed)) {
 			throw new Error(
 				`Invalid environment variable ${String(
-					name
-				)}: "${value}" is not an integer`
+					name,
+				)}: "${value}" is not an integer`,
 			);
 		}
 
@@ -116,8 +116,8 @@ export class UnsafeEnvParser<TEnv extends string> {
 		if (isNaN(parsed)) {
 			throw new Error(
 				`Invalid environment variable ${String(
-					name
-				)}: "${value}" is not a number`
+					name,
+				)}: "${value}" is not a number`,
 			);
 		}
 

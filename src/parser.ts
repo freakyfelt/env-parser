@@ -27,7 +27,7 @@ export class EnvParser<TEnv extends string> {
 	public readonly unsafe: UnsafeEnvParser<TEnv>;
 
 	constructor(
-		env: Record<TEnv, string | undefined> = process.env as Record<TEnv, string>
+		env: Record<TEnv, string | undefined> = process.env as Record<TEnv, string>,
 	) {
 		this.unsafe = new UnsafeEnvParser(env);
 	}

@@ -11,3 +11,8 @@ updates:
       interval: "daily"
     labels:
       - dependencies
+
+ignore:
+  - package-name: "@types/node"
+    versions:
+      - ">= 19.0.0"
