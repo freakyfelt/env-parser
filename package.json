@@ -12,38 +12,45 @@
   "repository": "https://github.com/freakyfelt/env-parser",
   "license": "MIT",
   "engines": {
-    "node": ">=16"
+    "node": ">=18"
   },
-  "main": "index.js",
   "files": [
     "dist/**/*"
   ],
   "exports": {
-    "./*": {
-      "types": "./dist/types/*.d.ts",
-      "require": "./dist/cjs/*.js",
-      "import": "./dist/esm/*.js",
-      "default": "./dist/esm/*.js"
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "import": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "require": "./dist/index.js"
+      }
     }
   },
   "scripts": {
-    "build": "npm run clean && npm run build:compile && npm run build:post",
-    "build:compile": "tsc -b ./tsconfig.cjs.json ./tsconfig.esm.json ./tsconfig.types.json",
-    "build:post": "node scripts/esm-package-json.mjs",
+    "build": "tsup --clean",
     "clean": "rm -rf ./dist",
+    "ci": "npm run format:check && npm run lint && npm run test:ci",
     "format": "prettier --loglevel warn --write \"**/*.{ts,md}\"",
-    "lint": "eslint . --cache --fix --ext .ts,.tsx",
-    "pretest": "npm run lint && tsc",
+    "format:check": "prettier --loglevel warn --check \"**/*.{ts,md}\"",
+    "lint": "eslint . --cache --ext .ts,.tsx && tsc --noEmit",
+    "lint:fix": "eslint . --cache --fix --ext .ts,.tsx",
     "test": "mocha",
-    "posttest": "npm run format",
+    "test:ci": "mocha",
+    "posttest": "npm run format && npm run lint:fix",
     "prepare": "husky install"
   },
-  "keywords": ["env", "process", "parser"],
+  "keywords": [
+    "env",
+    "process",
+    "parser"
+  ],
   "devDependencies": {
-    "@tsconfig/node16": "^1.0.3",
-    "@types/jest": "^29.5.1",
+    "@tsconfig/node18": "^18.2.0",
     "@types/mocha": "^10.0.1",
-    "@types/node": "^16.18.25",
+    "@types/node": "^18.17.5",
     "@typescript-eslint/eslint-plugin": "^5.59.2",
     "@typescript-eslint/parser": "^5.59.2",
     "eslint": "^8.39.0",
@@ -52,7 +59,8 @@
     "mocha": "^10.2.0",
     "prettier": "^2.8.8",
     "ts-node": "^10.9.1",
-    "typescript": "^5.0.4"
+    "tsup": "^7.2.0",
+    "typescript": "^5.1.6"
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix"
