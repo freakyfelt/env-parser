@@ -1,6 +1,6 @@
 {
   "name": "env-parser",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Provides a simple way to parse environment variables into a typed object",
   "author": {
     "name": "Bruce Felt",
