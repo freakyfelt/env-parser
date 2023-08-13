@@ -1,5 +1,5 @@
 {
-  "name": "env-parser",
+  "name": "@freakyfelt/env-parser",
   "version": "1.0.0",
   "description": "Provides a simple way to parse environment variables into a typed object",
   "author": {
@@ -37,6 +37,7 @@
     "format:check": "prettier --loglevel warn --check \"**/*.{ts,md}\"",
     "lint": "eslint . --cache --ext .ts,.tsx && tsc --noEmit",
     "lint:fix": "eslint . --cache --fix --ext .ts,.tsx",
+    "prepublishOnly": "npm run build",
     "test": "mocha",
     "test:ci": "mocha",
     "posttest": "npm run format && npm run lint:fix",
