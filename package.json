@@ -51,9 +51,9 @@
   "devDependencies": {
     "@tsconfig/node18": "^18.2.4",
     "@types/mocha": "^10.0.10",
-    "@types/node": "^18.19.69",
-    "@typescript-eslint/eslint-plugin": "^8.19.0",
-    "@typescript-eslint/parser": "^8.19.0",
+    "@types/node": "^18.19.70",
+    "@typescript-eslint/eslint-plugin": "^8.19.1",
+    "@typescript-eslint/parser": "^8.19.1",
     "eslint": "^8.57.1",
     "husky": "^9.1.7",
     "lint-staged": "^15.3.0",
