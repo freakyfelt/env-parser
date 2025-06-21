@@ -1,6 +1,6 @@
-import { beforeEach, describe, it } from "mocha";
 import assert from "node:assert";
-import { EnvParser } from "./parser";
+import { beforeEach, describe, it } from "node:test";
+import { EnvParser } from "./parser.js";
 
 interface ExampleEnv {
 	PORT: number;
