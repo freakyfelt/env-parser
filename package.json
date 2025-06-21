@@ -41,7 +41,7 @@
     "prepublishOnly": "npm run build",
     "test": "tsc && npm run test:only -- src/*.test.ts",
     "test:only": "node --loader ts-node/esm --test",
-    "test:ci": "tsc && npm run test:only -- src/**/*.test.ts",
+    "test:ci": "tsc && npm run test:only -- src/*.test.ts",
     "posttest": "npm run format && npm run lint:fix",
     "prepare": "husky install"
   },
