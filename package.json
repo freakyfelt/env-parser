@@ -12,7 +12,7 @@
   "repository": "https://github.com/freakyfelt/env-parser",
   "license": "MIT",
   "engines": {
-    "node": ">=18"
+    "node": ">=20.17"
   },
   "files": [
     "dist/**/*"
@@ -34,7 +34,7 @@
     "clean": "rm -rf ./dist",
     "ci": "npm run format:check && npm run lint && npm run test:ci",
     "format": "prettier --loglevel warn --write \"**/*.{ts,md}\"",
-    "format:check": "prettier --loglevel warn --check \"**/*.{ts,md}\"",
+    "format:check": "prettier --log-level warn --check \"**/*.{ts,md}\"",
     "lint": "eslint . --cache --ext .ts,.tsx && tsc --noEmit",
     "lint:fix": "eslint . --cache --fix --ext .ts,.tsx",
     "prepublishOnly": "npm run build",
@@ -49,9 +49,9 @@
     "parser"
   ],
   "devDependencies": {
-    "@tsconfig/node18": "^18.2.4",
+    "@tsconfig/node20": "^20.1.6",
     "@types/mocha": "^10.0.10",
-    "@types/node": "^18.19.112",
+    "@types/node": "^20.19.1",
     "@typescript-eslint/eslint-plugin": "^8.34.1",
     "@typescript-eslint/parser": "^8.32.1",
     "eslint": "^8.57.1",
