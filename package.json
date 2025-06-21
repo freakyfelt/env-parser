@@ -14,18 +14,19 @@
   "engines": {
     "node": ">=20.17"
   },
+  "type": "module",
   "files": [
     "dist/**/*"
   ],
   "exports": {
     ".": {
       "import": {
-        "types": "./dist/index.d.mts",
-        "import": "./dist/index.mjs"
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js"
       },
       "require": {
-        "types": "./dist/index.d.ts",
-        "require": "./dist/index.js"
+        "types": "./dist/index.d.cts",
+        "require": "./dist/index.cjs"
       }
     }
   },
@@ -33,13 +34,14 @@
     "build": "tsup --clean",
     "clean": "rm -rf ./dist",
     "ci": "npm run format:check && npm run lint && npm run test:ci",
-    "format": "prettier --loglevel warn --write \"**/*.{ts,md}\"",
+    "format": "prettier --log-level warn --write \"**/*.{ts,md}\"",
     "format:check": "prettier --log-level warn --check \"**/*.{ts,md}\"",
     "lint": "eslint . --cache --ext .ts,.tsx && tsc --noEmit",
     "lint:fix": "eslint . --cache --fix --ext .ts,.tsx",
     "prepublishOnly": "npm run build",
-    "test": "mocha",
-    "test:ci": "mocha",
+    "test": "tsc && npm run test:only -- src/*.test.ts",
+    "test:only": "node --loader ts-node/esm --test",
+    "test:ci": "tsc && npm run test:only -- src/*.test.ts",
     "posttest": "npm run format && npm run lint:fix",
     "prepare": "husky install"
   },
@@ -50,14 +52,12 @@
   ],
   "devDependencies": {
     "@tsconfig/node20": "^20.1.6",
-    "@types/mocha": "^10.0.10",
     "@types/node": "^20.19.1",
     "@typescript-eslint/eslint-plugin": "^8.34.1",
     "@typescript-eslint/parser": "^8.32.1",
     "eslint": "^8.57.1",
     "husky": "^9.1.7",
     "lint-staged": "^16.1.2",
-    "mocha": "^11.7.0",
     "prettier": "^3.5.3",
     "ts-node": "^10.9.2",
     "tsup": "^8.5.0",

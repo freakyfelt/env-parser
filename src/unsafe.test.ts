@@ -1,6 +1,6 @@
-import { before, describe, it } from "mocha";
 import assert from "node:assert";
-import { UnsafeEnvParser, isFalsy, isTruthy } from "./unsafe";
+import { before, describe, it } from "node:test";
+import { UnsafeEnvParser, isFalsy, isTruthy } from "./unsafe.js";
 
 const TRUTHY = ["true", "1", "yes", "on"];
 describe("isTruthy", () => {
