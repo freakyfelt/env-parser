@@ -40,7 +40,7 @@
     "lint:fix": "eslint . --cache --fix --ext .ts,.tsx",
     "prepublishOnly": "npm run build",
     "test": "tsc && npm run test:only -- src/*.test.ts",
-    "test:only": "node --loader ts-node/esm --test",
+    "test:only": "node --test",
     "test:ci": "tsc && npm run test:only -- src/*.test.ts",
     "posttest": "npm run format && npm run lint:fix",
     "prepare": "husky install"
@@ -59,7 +59,6 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.2.6",
     "prettier": "^3.6.2",
-    "ts-node": "^10.9.2",
     "tsup": "^8.5.0",
     "typescript": "^5.9.3"
   },

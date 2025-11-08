@@ -1,2 +1,2 @@
-export * from "./parser.js";
-export * from "./unsafe.js";
+export * from "./parser.ts";
+export * from "./unsafe.ts";

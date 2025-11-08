@@ -1,5 +1,5 @@
 import process from "node:process";
-import { UnsafeEnvParser } from "./unsafe.js";
+import { UnsafeEnvParser } from "./unsafe.ts";
 
 /**
  * A safe environment variable parser.
