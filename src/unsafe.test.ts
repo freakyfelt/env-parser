@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import { before, describe, it } from "node:test";
-import { UnsafeEnvParser, isFalsy, isTruthy } from "./unsafe.js";
+import { UnsafeEnvParser, isFalsy, isTruthy } from "./unsafe.ts";
 
 const TRUTHY = ["true", "1", "yes", "on"];
 describe("isTruthy", () => {

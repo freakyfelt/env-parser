@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import { beforeEach, describe, it } from "node:test";
-import { EnvParser } from "./parser.js";
+import { EnvParser } from "./parser.ts";
 
 interface ExampleEnv {
 	PORT: number;
