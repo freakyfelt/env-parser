@@ -53,9 +53,9 @@
   "devDependencies": {
     "@tsconfig/node20": "^20.1.9",
     "@types/node": "^20.19.1",
-    "@typescript-eslint/eslint-plugin": "^8.54.0",
+    "@typescript-eslint/eslint-plugin": "^8.56.1",
     "@typescript-eslint/parser": "^8.32.1",
-    "eslint": "^8.57.1",
+    "eslint": "^10.0.2",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
     "prettier": "^3.8.1",
