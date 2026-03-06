@@ -23,6 +23,7 @@ describe("EnvParser", () => {
 			SAMPLE_RATE: "0.5",
 		});
 
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 		emptyParser = new EnvParser({} as any);
 	});
 
