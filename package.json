@@ -9,7 +9,9 @@
   "contributors": [],
   "homepage": "https://github.com/freakyfelt/env-parser",
   "bugs": "https://github.com/freakyfelt/env-parser/issues",
-  "repository": "https://github.com/freakyfelt/env-parser",
+  "repository": {
+    "url": "https://github.com/freakyfelt/env-parser"
+  },
   "license": "MIT",
   "engines": {
     "node": ">=20.17"
@@ -20,20 +22,17 @@
   ],
   "exports": {
     ".": {
-      "import": {
-        "types": "./dist/index.d.ts",
-        "import": "./dist/index.js"
-      },
-      "require": {
-        "types": "./dist/index.d.cts",
-        "require": "./dist/index.cjs"
-      }
-    }
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json"
   },
+  "types": "./dist/index.d.cts",
   "scripts": {
-    "build": "tsup --clean",
+    "build": "tsdown",
+    "build:check": "tsdown --publint --attw",
     "clean": "rm -rf ./dist",
-    "ci": "npm run format:check && npm run lint && npm run test:ci",
+    "ci": "npm run format:check && npm run lint && npm run test:ci && npm run build:check",
     "format": "prettier --log-level warn --write \"**/*.{ts,md}\"",
     "format:check": "prettier --log-level warn --check \"**/*.{ts,md}\"",
     "lint": "eslint . --cache --ext .ts,.tsx && tsc --noEmit",
@@ -51,20 +50,25 @@
     "parser"
   ],
   "devDependencies": {
+    "@arethetypeswrong/core": "^0.18.2",
     "@eslint/js": "^10.0.1",
     "@tsconfig/node20": "^20.1.9",
     "@types/node": "^20.19.1",
     "@typescript-eslint/eslint-plugin": "^8.57.0",
     "@typescript-eslint/parser": "^8.57.0",
+    "attw": "^1.0.0",
     "eslint": "^10.0.3",
     "husky": "^9.1.7",
     "lint-staged": "^16.3.3",
     "prettier": "^3.8.1",
-    "tsup": "^8.5.1",
+    "publint": "^0.3.18",
+    "tsdown": "^0.21.3",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.57.0"
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix"
-  }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs"
 }
