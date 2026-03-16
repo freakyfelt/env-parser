@@ -59,7 +59,7 @@
     "attw": "^1.0.0",
     "eslint": "^10.0.3",
     "husky": "^9.1.7",
-    "lint-staged": "^16.3.3",
+    "lint-staged": "^16.4.0",
     "prettier": "^3.8.1",
     "publint": "^0.3.18",
     "tsdown": "^0.21.3",
