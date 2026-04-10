@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.0](https://github.com/freakyfelt/env-parser/compare/v2.0.0...v3.0.0) (2026-04-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* drop default reference for process.env and Node 20.x support ([#412](https://github.com/freakyfelt/env-parser/issues/412))
+
+### Code Refactoring
+
+* drop default reference for process.env and Node 20.x support ([#412](https://github.com/freakyfelt/env-parser/issues/412)) ([7f938ce](https://github.com/freakyfelt/env-parser/commit/7f938ce504c99b13a17208e6885b3996506920fe))
+
 ## [2.0.0](https://github.com/freakyfelt/env-parser/compare/v1.0.0...v2.0.0) (2025-11-08)
 
 
