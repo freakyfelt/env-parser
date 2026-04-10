@@ -1,32 +1,7 @@
 import assert from "node:assert";
 import { before, describe, it } from "node:test";
-import { UnsafeEnvParser, isFalsy, isTruthy } from "./unsafe.ts";
-
-const TRUTHY = ["true", "1", "yes", "on"];
-describe("isTruthy", () => {
-	for (const value of TRUTHY) {
-		it(`returns true for ${value}`, () => {
-			assert.equal(isTruthy(value), true);
-		});
-	}
-
-	it("returns false for other values", () => {
-		assert.equal(isTruthy("hello"), false);
-	});
-});
-
-const FALSY = ["false", "0", "no", "off"];
-describe("isFalsy", () => {
-	for (const value of FALSY) {
-		it(`returns true for ${value}`, () => {
-			assert.equal(isFalsy(value), true);
-		});
-	}
-
-	it("returns false for other values", () => {
-		assert.equal(isFalsy("hello"), false);
-	});
-});
+import { ParseError } from "./error.ts";
+import { UnsafeEnvParser } from "./unsafe.ts";
 
 interface ExampleEnv {
 	PORT: number;
@@ -82,8 +57,8 @@ describe("UnsafeEnvParser", () => {
 			assert.strictEqual(parser.bool("MISSING"), undefined);
 		});
 
-		it("throws if the environment variable is not a boolean", () => {
-			assert.throws(() => parser.bool("PORT"));
+		it("throws ParseError if the environment variable is not a boolean", () => {
+			assert.throws(() => parser.bool("PORT"), ParseError);
 		});
 	});
 
@@ -101,8 +76,8 @@ describe("UnsafeEnvParser", () => {
 			assert.strictEqual(parser.int("MISSING"), undefined);
 		});
 
-		it("throws if the environment variable is a boolean", () => {
-			assert.throws(() => parser.int("DEBUG"));
+		it("throws ParseError if the environment variable is a boolean", () => {
+			assert.throws(() => parser.int("DEBUG"), ParseError);
 		});
 
 		it("returns the expected integer if the environment variable is a float", () => {
@@ -124,16 +99,16 @@ describe("UnsafeEnvParser", () => {
 			assert.strictEqual(parser.float("MISSING"), undefined);
 		});
 
-		it("throws if the environment variable is a boolean", () => {
-			assert.throws(() => parser.float("DEBUG"));
+		it("throws ParseError if the environment variable is a boolean", () => {
+			assert.throws(() => parser.float("DEBUG"), ParseError);
 		});
 
 		it("returns the expected float if the environment variable is an integer", () => {
 			assert.equal(parser.float("PORT"), 8080);
 		});
 
-		it("throws if the environment variable is not a number", () => {
-			assert.throws(() => parser.float("LOG_LEVEL"));
+		it("throws ParseError if the environment variable is not a number", () => {
+			assert.throws(() => parser.float("LOG_LEVEL"), ParseError);
 		});
 	});
 });

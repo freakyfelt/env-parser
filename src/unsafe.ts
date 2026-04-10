@@ -1,13 +1,5 @@
-const TRUTHY = ["true", "1", "yes", "y", "on"];
-const FALSY = ["false", "0", "no", "n", "off"];
-
-export function isTruthy(value: string): boolean {
-	return TRUTHY.includes(value);
-}
-
-export function isFalsy(value: string): boolean {
-	return FALSY.includes(value);
-}
+import { ParseError } from "./error.ts";
+import { isFalsy, isTruthy } from "./utils/bool.ts";
 
 /**
  * A parser for environment variables that attempts to parse the string
@@ -30,19 +22,17 @@ export function isFalsy(value: string): boolean {
  * env.str("MISSING"); // => undefined
  */
 export class UnsafeEnvParser<TEnv extends string> {
-	private readonly env: Record<TEnv, string | undefined>;
+	readonly #env: Map<TEnv, string | undefined>;
 
 	constructor(env: Record<TEnv, string | undefined>) {
-		// process.env has a performance hit each time it is accessed
-		// so we use a local copy of the environment variables
-		this.env = { ...env };
+		this.#env = new Map(Object.entries(env)) as Map<TEnv, string | undefined>;
 	}
 
 	/**
 	 * Parse and trim a string environment variable if present.
 	 */
 	str<T extends string = string>(name: TEnv): T | undefined {
-		return this.env[name] as T | undefined;
+		return this.#env.get(name) as T | undefined;
 	}
 
 	/**
@@ -68,11 +58,7 @@ export class UnsafeEnvParser<TEnv extends string> {
 		} else if (isFalsy(value)) {
 			return false;
 		} else {
-			throw new Error(
-				`Invalid environment variable ${String(
-					name,
-				)}: "${value}" is not a boolean`,
-			);
+			throw new ParseError(String(name), value, "boolean");
 		}
 	}
 
@@ -91,11 +77,7 @@ export class UnsafeEnvParser<TEnv extends string> {
 		const parsed = parseInt(value, 10);
 
 		if (isNaN(parsed)) {
-			throw new Error(
-				`Invalid environment variable ${String(
-					name,
-				)}: "${value}" is not an integer`,
-			);
+			throw new ParseError(String(name), value, "integer");
 		}
 
 		return parsed;
@@ -105,7 +87,7 @@ export class UnsafeEnvParser<TEnv extends string> {
 	 * Parse a floating point environment variable if present.
 	 */
 	float(name: TEnv): number | undefined {
-		const value = this.env[name];
+		const value = this.str(name);
 
 		if (value === undefined) {
 			return;
@@ -114,11 +96,7 @@ export class UnsafeEnvParser<TEnv extends string> {
 		const parsed = parseFloat(value);
 
 		if (isNaN(parsed)) {
-			throw new Error(
-				`Invalid environment variable ${String(
-					name,
-				)}: "${value}" is not a number`,
-			);
+			throw new ParseError(String(name), value, "float");
 		}
 
 		return parsed;
