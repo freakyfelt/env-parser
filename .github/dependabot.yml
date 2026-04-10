@@ -14,7 +14,7 @@ updates:
     ignore:
       - dependency-name: "@types/node"
         versions:
-          - ">= 19.0.0"
+          - ">= 23.0.0"
     groups:
       development:
         dependency-type: "development"

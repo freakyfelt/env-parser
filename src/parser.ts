@@ -1,4 +1,3 @@
-import process from "node:process";
 import { UnsafeEnvParser } from "./unsafe.ts";
 
 /**
@@ -26,9 +25,7 @@ import { UnsafeEnvParser } from "./unsafe.ts";
 export class EnvParser<TEnv extends string> {
 	public readonly unsafe: UnsafeEnvParser<TEnv>;
 
-	constructor(
-		env: Record<TEnv, string | undefined> = process.env as Record<TEnv, string>,
-	) {
+	constructor(env: Record<TEnv, string | undefined>) {
 		this.unsafe = new UnsafeEnvParser(env);
 	}
 

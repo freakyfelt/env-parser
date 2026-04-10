@@ -30,19 +30,17 @@ export function isFalsy(value: string): boolean {
  * env.str("MISSING"); // => undefined
  */
 export class UnsafeEnvParser<TEnv extends string> {
-	private readonly env: Record<TEnv, string | undefined>;
+	readonly #env: Record<TEnv, string | undefined>;
 
 	constructor(env: Record<TEnv, string | undefined>) {
-		// process.env has a performance hit each time it is accessed
-		// so we use a local copy of the environment variables
-		this.env = { ...env };
+		this.#env = { ...env };
 	}
 
 	/**
 	 * Parse and trim a string environment variable if present.
 	 */
 	str<T extends string = string>(name: TEnv): T | undefined {
-		return this.env[name] as T | undefined;
+		return this.#env[name] as T | undefined;
 	}
 
 	/**
@@ -105,7 +103,7 @@ export class UnsafeEnvParser<TEnv extends string> {
 	 * Parse a floating point environment variable if present.
 	 */
 	float(name: TEnv): number | undefined {
-		const value = this.env[name];
+		const value = this.#env[name];
 
 		if (value === undefined) {
 			return;
