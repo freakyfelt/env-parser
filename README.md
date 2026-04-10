@@ -2,11 +2,17 @@
 
 Provides yet another environment variable parser that aims to be dependency free, concise, type safe, and easy to use. It does not seek to automate constructing entire configuration objects, rather it provides a common utility for interpreting environment variables that can then be used in your configuration.
 
-> [!TIP] Having your environment variables defined as an interface also has the benefit of self documenting what the expected environment variables are.
+<!-- prettier-ignore-start -->
+> [!TIP]
+> Having your environment variables defined as an interface also has the benefit of self documenting what the expected environment variables are.
+<!-- prettier-ignore-end -->
 
 ## Getting started
 
-> [!TIP] This package has an engines.node requirement of `>=22.0.0` but should work fine with older versions of node.
+<!-- prettier-ignore-start -->
+> [!TIP]
+> This package has an engines.node requirement of `>=22.0.0` but should work fine with older versions of node.
+<!-- prettier-ignore-end -->
 
 To get started, first define what your environment variables should look like in a type object.
 
