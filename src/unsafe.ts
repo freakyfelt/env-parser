@@ -32,17 +32,17 @@ export function isFalsy(value: string): boolean {
  * env.str("MISSING"); // => undefined
  */
 export class UnsafeEnvParser<TEnv extends string> {
-	readonly #env: Record<TEnv, string | undefined>;
+	readonly #env: Map<TEnv, string | undefined>;
 
 	constructor(env: Record<TEnv, string | undefined>) {
-		this.#env = { ...env };
+		this.#env = new Map(Object.entries(env)) as Map<TEnv, string | undefined>;
 	}
 
 	/**
 	 * Parse and trim a string environment variable if present.
 	 */
 	str<T extends string = string>(name: TEnv): T | undefined {
-		return this.#env[name] as T | undefined;
+		return this.#env.get(name) as T | undefined;
 	}
 
 	/**
