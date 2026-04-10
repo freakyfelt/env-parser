@@ -1,5 +1,7 @@
 import assert from "node:assert";
 import { beforeEach, describe, it } from "node:test";
+import process from "node:process";
+import { MissingError } from "./error.ts";
 import { EnvParser } from "./parser.ts";
 
 interface ExampleEnv {
@@ -27,13 +29,25 @@ describe("EnvParser", () => {
 		emptyParser = new EnvParser({} as any);
 	});
 
+	describe("fromProcessEnv", () => {
+		it("populates from process.env", () => {
+			process.env.MY_TEST_VAR = "from-process";
+			assert.equal(process.env.MY_TEST_VAR, "from-process");
+
+			assert.equal(
+				EnvParser.fromProcessEnv<"MY_TEST_VAR">().str("MY_TEST_VAR"),
+				"from-process",
+			);
+		});
+	});
+
 	describe("str", () => {
 		it("returns the value of the environment variable", () => {
 			assert.equal(parser.str("HOST"), "localhost");
 		});
 
-		it("throws if the environment variable is not set", () => {
-			assert.throws(() => emptyParser.str("HOST"));
+		it("throws MissingError if the environment variable is not set", () => {
+			assert.throws(() => emptyParser.str("HOST"), MissingError);
 		});
 
 		it("uses the default value provided", () => {
@@ -56,8 +70,8 @@ describe("EnvParser", () => {
 			assert.equal(parser.bool("DEBUG"), true);
 		});
 
-		it("throws if the environment variable is not set", () => {
-			assert.throws(() => emptyParser.bool("DEBUG"));
+		it("throws MissingError if the environment variable is not set", () => {
+			assert.throws(() => emptyParser.bool("DEBUG"), MissingError);
 		});
 
 		it("uses the default value provided", () => {
@@ -84,8 +98,8 @@ describe("EnvParser", () => {
 			assert.equal(parser.int("PORT"), 8080);
 		});
 
-		it("throws if the environment variable is not set", () => {
-			assert.throws(() => emptyParser.int("PORT"));
+		it("throws MissingError if the environment variable is not set", () => {
+			assert.throws(() => emptyParser.int("PORT"), MissingError);
 		});
 
 		it("uses the default value provided", () => {
@@ -116,8 +130,8 @@ describe("EnvParser", () => {
 			assert.equal(parser.float("SAMPLE_RATE"), 0.5);
 		});
 
-		it("throws if the environment variable is not set", () => {
-			assert.throws(() => emptyParser.float("SAMPLE_RATE"));
+		it("throws MissingError if the environment variable is not set", () => {
+			assert.throws(() => emptyParser.float("SAMPLE_RATE"), MissingError);
 		});
 
 		it("uses the default value provided", () => {

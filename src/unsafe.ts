@@ -1,3 +1,5 @@
+import { ParseError } from "./error.ts";
+
 const TRUTHY = ["true", "1", "yes", "y", "on"];
 const FALSY = ["false", "0", "no", "n", "off"];
 
@@ -66,11 +68,7 @@ export class UnsafeEnvParser<TEnv extends string> {
 		} else if (isFalsy(value)) {
 			return false;
 		} else {
-			throw new Error(
-				`Invalid environment variable ${String(
-					name,
-				)}: "${value}" is not a boolean`,
-			);
+			throw new ParseError(String(name), value, "boolean");
 		}
 	}
 
@@ -89,11 +87,7 @@ export class UnsafeEnvParser<TEnv extends string> {
 		const parsed = parseInt(value, 10);
 
 		if (isNaN(parsed)) {
-			throw new Error(
-				`Invalid environment variable ${String(
-					name,
-				)}: "${value}" is not an integer`,
-			);
+			throw new ParseError(String(name), value, "integer");
 		}
 
 		return parsed;
@@ -103,7 +97,7 @@ export class UnsafeEnvParser<TEnv extends string> {
 	 * Parse a floating point environment variable if present.
 	 */
 	float(name: TEnv): number | undefined {
-		const value = this.#env[name];
+		const value = this.str(name);
 
 		if (value === undefined) {
 			return;
@@ -112,11 +106,7 @@ export class UnsafeEnvParser<TEnv extends string> {
 		const parsed = parseFloat(value);
 
 		if (isNaN(parsed)) {
-			throw new Error(
-				`Invalid environment variable ${String(
-					name,
-				)}: "${value}" is not a number`,
-			);
+			throw new ParseError(String(name), value, "float");
 		}
 
 		return parsed;

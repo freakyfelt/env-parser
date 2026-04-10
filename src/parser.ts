@@ -1,4 +1,11 @@
+import { MissingError } from "./error.ts";
 import { UnsafeEnvParser } from "./unsafe.ts";
+
+type GlobalThis = {
+	process?: {
+		env?: Record<string, string>;
+	};
+};
 
 /**
  * A safe environment variable parser.
@@ -25,6 +32,11 @@ import { UnsafeEnvParser } from "./unsafe.ts";
 export class EnvParser<TEnv extends string> {
 	public readonly unsafe: UnsafeEnvParser<TEnv>;
 
+	static fromProcessEnv<TEnv extends string>(): EnvParser<TEnv> {
+		const processEnv = (globalThis as GlobalThis).process?.env ?? {};
+		return new EnvParser(processEnv as Record<TEnv, string | undefined>);
+	}
+
 	constructor(env: Record<TEnv, string | undefined>) {
 		this.unsafe = new UnsafeEnvParser(env);
 	}
@@ -33,7 +45,7 @@ export class EnvParser<TEnv extends string> {
 		const value = this.unsafe.str(name) ?? def;
 
 		if (value === undefined) {
-			throw new Error(`Missing environment variable: ${String(name)}`);
+			throw new MissingError(String(name));
 		}
 
 		return value as T;
@@ -48,7 +60,7 @@ export class EnvParser<TEnv extends string> {
 		const value = this.unsafe.bool(name) ?? def;
 
 		if (value === undefined) {
-			throw new Error(`Missing environment variable: ${String(name)}`);
+			throw new MissingError(String(name));
 		}
 
 		return value;
@@ -63,7 +75,7 @@ export class EnvParser<TEnv extends string> {
 		const value = this.unsafe.int(name) ?? def;
 
 		if (value === undefined) {
-			throw new Error(`Missing environment variable: ${String(name)}`);
+			throw new MissingError(String(name));
 		}
 
 		return value;
@@ -78,7 +90,7 @@ export class EnvParser<TEnv extends string> {
 		const value = this.unsafe.float(name) ?? def;
 
 		if (value === undefined) {
-			throw new Error(`Missing environment variable: ${String(name)}`);
+			throw new MissingError(String(name));
 		}
 
 		return value;
