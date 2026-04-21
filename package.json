@@ -53,8 +53,8 @@
     "@eslint/js": "^10.0.1",
     "@tsconfig/node22": "^22.0.2",
     "@types/node": "^22.18.12",
-    "@typescript-eslint/eslint-plugin": "^8.58.2",
-    "@typescript-eslint/parser": "^8.58.2",
+    "@typescript-eslint/eslint-plugin": "^8.59.0",
+    "@typescript-eslint/parser": "^8.59.0",
     "attw": "^1.0.0",
     "eslint": "^10.2.1",
     "lint-staged": "^16.4.0",
@@ -62,7 +62,7 @@
     "publint": "^0.3.18",
     "tsdown": "^0.21.9",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.58.2"
+    "typescript-eslint": "^8.59.0"
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix"
