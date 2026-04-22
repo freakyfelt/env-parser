@@ -34,7 +34,7 @@ export class EnvParser<TEnv extends string> {
 
 	static fromProcessEnv<TEnv extends string>(): EnvParser<TEnv> {
 		const processEnv = (globalThis as GlobalThis).process?.env ?? {};
-		return new EnvParser(processEnv as Record<TEnv, string | undefined>);
+		return new EnvParser<TEnv>(processEnv);
 	}
 
 	constructor(env: Record<TEnv, string | undefined>) {
