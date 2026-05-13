@@ -59,7 +59,7 @@
     "eslint": "^10.3.0",
     "lint-staged": "^17.0.4",
     "prettier": "^3.8.3",
-    "publint": "^0.3.20",
+    "publint": "^0.3.21",
     "tsdown": "^0.22.0",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.59.3"
