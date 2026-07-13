@@ -49,18 +49,18 @@
     "parser"
   ],
   "devDependencies": {
-    "@arethetypeswrong/core": "^0.18.4",
+    "@arethetypeswrong/core": "^0.18.5",
     "@eslint/js": "^10.0.1",
     "@tsconfig/node22": "^22.0.2",
     "@types/node": "^22.20.1",
     "@typescript-eslint/eslint-plugin": "^8.63.0",
     "@typescript-eslint/parser": "^8.63.0",
     "attw": "^1.0.0",
-    "eslint": "^10.6.0",
+    "eslint": "^10.7.0",
     "lint-staged": "^17.0.8",
-    "prettier": "^3.9.4",
+    "prettier": "^3.9.5",
     "publint": "^0.3.21",
-    "tsdown": "^0.22.4",
+    "tsdown": "^0.22.7",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.63.0"
   },
