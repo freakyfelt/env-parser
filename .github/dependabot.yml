@@ -36,4 +36,6 @@ updates:
           - "patch"
         dependency-type: "development"
       development:
+        patterns:
+          - "*"
         dependency-type: "development"
